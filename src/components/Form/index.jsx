@@ -1,8 +1,20 @@
-import { Box, Container, FormControl, FormLabel, Grid, GridItem, Input } from "@chakra-ui/react";
+import { Box, Container, FormControl, FormLabel, Grid, GridItem, Input, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  name: yup.string().required(),
+  photo: yup.string().required(),
+}).required();
+
+
 export function Form() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+
   const onSubmit = data => console.log(data);
 
   return (
@@ -49,6 +61,7 @@ export function Form() {
                   bgColor={"#fff"}
                   {...register("name", { required: true, maxLength: 20 })}
                 />
+                <Text>{errors.name?.message}</Text>
               </Box>
               <Box
                 margin={"10px auto"}
@@ -64,6 +77,7 @@ export function Form() {
                   bgColor={"#fff"}
                   {...register("photo", { required: true })}
                 />
+                <Text>{errors.photo?.message}</Text>
               </Box>
               <Input
                 type={"submit"}
