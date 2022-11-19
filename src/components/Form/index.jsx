@@ -20,6 +20,7 @@ export function Form() {
   const [overall, setOverall] = useState();
 
   const [players, setPlayers] = useState([]);
+  const [storedPlayers, setStoredPlayers] = useState([]);
 
   const { register, handleSubmit, resetField, onSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema),
@@ -39,12 +40,22 @@ export function Form() {
         overall: overall,
       }
       setPlayers([...players, data]);
+
       resetField('name');
       resetField('photo');
       resetField('overall');
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem('@players:soccer-1.0.0', JSON.stringify(players));
+
+    const storedPlayers = localStorage.getItem('@players:soccer-1.0.0');
+    if (storedPlayers) {
+      setStoredPlayers(JSON.parse(storedPlayers));
+    }
+    console.log(storedPlayers);
+  }, [players]);
 
   return (
     <Box
@@ -68,10 +79,11 @@ export function Form() {
             borderRadius={"10px"}
           >
             <Grid templateColumns='repeat(4, 1fr)' gap={6}>
-              {players?.map((player) => {
+              {storedPlayers?.map((player) => {
                 return (
                   <GridItem>
                     <PlayerCard
+                      key={player.name}
                       name={player.name}
                       photo={player.photo}
                       overall={player.overall}
