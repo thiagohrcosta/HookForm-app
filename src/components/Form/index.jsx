@@ -1,9 +1,11 @@
-import { Box, Container, FormControl, FormLabel, Grid, GridItem, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Container, FormControl, FormLabel, Grid, GridItem, Image, Input, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ErrorMessage } from "../ErrorMessage";
+import { useEffect, useState } from "react";
+import { PlayerCard } from "../PlayerCard";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -13,11 +15,32 @@ const schema = yup.object({
 
 
 export function Form() {
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+  const [name, setName] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [overall, setOverall] = useState('');
+
+  const [players, setPlayers] = useState([]);
+
+  const { register, handleSubmit, onSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = data => console.log(data);
+
+  function submit() {
+    const data = {
+      name: name,
+      photo: photo,
+      overall: overall,
+    }
+    setPlayers([...players, data]);
+    setName('');
+    setPhoto('');
+    setOverall('');
+  }
+
+  useEffect(() => {
+    console.log(players);
+  }, [players])
 
   return (
     <Box
@@ -35,9 +58,22 @@ export function Form() {
         >
           <Box
             width={"75%"}
-            bgColor={"#2d2"}
+            bgColor={"#59CD90"}
+            padding={"50px"}
           >
-
+            <Grid templateColumns='repeat(4, 1fr)' gap={6}>
+              {players?.map((player) => {
+                return (
+                  <GridItem>
+                    <PlayerCard
+                      name={player.name}
+                      photo={player.photo}
+                      overall={player.overall}
+                    />
+                  </GridItem>
+                )
+              })}
+            </Grid>
           </Box>
           <Box
             width={"25%"}
@@ -47,7 +83,6 @@ export function Form() {
             <FormControl
               as={"form"}
               padding={"20px"}
-              onSubmit={handleSubmit(onSubmit)}
             >
               <Text
                 fontSize={"20px"}
@@ -72,6 +107,7 @@ export function Form() {
                 <Input
                   bgColor={"#fff"}
                   {...register("name", { required: true, maxLength: 20 })}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <ErrorMessage
                   error={errors.name?.message}
@@ -90,6 +126,7 @@ export function Form() {
                 <Input
                   bgColor={"#fff"}
                   {...register("photo", { required: true })}
+                  onChange={(e) => setPhoto(e.target.value)}
                 />
                 <ErrorMessage
                   error={errors.photo?.message}
@@ -109,12 +146,13 @@ export function Form() {
                   bgColor={"#fff"}
                   {...register("overall", { required: true })}
                   type={"number"}
+                  onChange={(e) => setOverall(e.target.value)}
                 />
                 <ErrorMessage
                   error={errors.overall?.message}
                 />
               </Box>
-              <Input
+              <Button
                 type={"submit"}
                 cursor={"pointer"}
                 bgColor={"#7261A3"}
@@ -126,13 +164,12 @@ export function Form() {
                 _hover={{
                   opacity: "0.8"
                 }}
+                onClick={handleSubmit(submit)}
               />
             </FormControl>
           </Box>
         </Box>
       </Container>
-
-
     </Box>
   )
 }
