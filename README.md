@@ -1,4 +1,4 @@
-![banner](https://res.cloudinary.com/dloadb2bx/image/upload/v1668869477/sticker_n36tay.png)
+![banner](https://res.cloudinary.com/dloadb2bx/image/upload/v1668870082/sticker_br7zwf.jpg)
 
 # Sticker Album
 This is a small project using React and ChakraUI with the objective of testing the implementation of the React Hook-Form library for form validation.
