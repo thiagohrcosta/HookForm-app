@@ -39,6 +39,9 @@ export function Form() {
         overall: overall,
       }
       setPlayers([...players, data]);
+      resetField('name');
+      resetField('photo');
+      resetField('overall');
     }
   }
 
@@ -107,7 +110,6 @@ export function Form() {
                   Player Name
                 </FormLabel>
                 <Input
-                  value={name}
                   bgColor={"#fff"}
                   {...register("name", { required: true, maxLength: 20 })}
                   onChange={(e) => setName(e.target.value)}
@@ -127,7 +129,6 @@ export function Form() {
                   Player Photo
                 </FormLabel>
                 <Input
-                  value={photo}
                   bgColor={"#fff"}
                   {...register("photo", { required: true })}
                   onChange={(e) => setPhoto(e.target.value)}
@@ -147,7 +148,6 @@ export function Form() {
                   Player Overall
                 </FormLabel>
                 <Input
-                  value={overall}
                   bgColor={"#fff"}
                   {...register("overall", { required: true })}
                   type={"number"}
