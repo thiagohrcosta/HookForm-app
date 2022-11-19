@@ -33,7 +33,7 @@ export function PlayerCard({
            <Box>
             <Text
               color={"#ffffff"}
-              fontSize={"20px"}
+              fontSize={"18px"}
               fontWeight={"bold"}
               display={"flex"}
             >
@@ -43,8 +43,8 @@ export function PlayerCard({
           <Box
             bgColor={"#2191FB"}
             borderRadius={"50%"}
-            height={"50px"}
-            width={"50px"}
+            height={"45px"}
+            width={"45px"}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
