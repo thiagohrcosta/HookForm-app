@@ -15,9 +15,9 @@ const schema = yup.object({
 
 
 export function Form() {
-  const [name, setName] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [overall, setOverall] = useState('');
+  const [name, setName] = useState();
+  const [photo, setPhoto] = useState();
+  const [overall, setOverall] = useState();
 
   const [players, setPlayers] = useState([]);
 
@@ -27,12 +27,18 @@ export function Form() {
 
 
   function submit() {
-    const data = {
-      name: name,
-      photo: photo,
-      overall: overall,
+    if (name && photo && overall) {
+      const data = {
+        name: name,
+        photo: photo,
+        overall: overall,
+      }
+      setPlayers([...players, data]);
+
     }
-    setPlayers([...players, data]);
+  }
+
+  function clearData() {
     setName('');
     setPhoto('');
     setOverall('');
@@ -60,6 +66,7 @@ export function Form() {
             width={"75%"}
             bgColor={"#59CD90"}
             padding={"50px"}
+            overflow={"auto"}
           >
             <Grid templateColumns='repeat(4, 1fr)' gap={6}>
               {players?.map((player) => {
@@ -105,6 +112,7 @@ export function Form() {
                   Player Name
                 </FormLabel>
                 <Input
+                  value={name}
                   bgColor={"#fff"}
                   {...register("name", { required: true, maxLength: 20 })}
                   onChange={(e) => setName(e.target.value)}
@@ -124,6 +132,7 @@ export function Form() {
                   Player Photo
                 </FormLabel>
                 <Input
+                  value={photo}
                   bgColor={"#fff"}
                   {...register("photo", { required: true })}
                   onChange={(e) => setPhoto(e.target.value)}
@@ -143,6 +152,7 @@ export function Form() {
                   Player Overall
                 </FormLabel>
                 <Input
+                  value={overall}
                   bgColor={"#fff"}
                   {...register("overall", { required: true })}
                   type={"number"}
@@ -161,11 +171,14 @@ export function Form() {
                 fontWeight={"bold"}
                 fontSize={"12px"}
                 margin={"10px auto"}
+                width={"100%"}
                 _hover={{
                   opacity: "0.8"
                 }}
                 onClick={handleSubmit(submit)}
-              />
+              >
+                ENVIAR
+              </Button>
             </FormControl>
           </Box>
         </Box>
