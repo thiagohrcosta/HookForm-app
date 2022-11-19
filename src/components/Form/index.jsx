@@ -65,6 +65,7 @@ export function Form() {
             bgColor={"#59CD90"}
             padding={"50px"}
             overflow={"auto"}
+            borderRadius={"10px"}
           >
             <Grid templateColumns='repeat(4, 1fr)' gap={6}>
               {players?.map((player) => {

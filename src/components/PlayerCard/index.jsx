@@ -8,6 +8,8 @@ export function PlayerCard({
   return (
     <Box>
       <Box
+        // background image with rgba gradient
+
         backgroundImage={`url(${photo})`}
         backgroundPosition={"center"}
         backgroundSize={"cover"}
@@ -19,31 +21,45 @@ export function PlayerCard({
         boxShadow={"0 0 10px #000"}
       >
         <Box
-          bgColor={"#000"}
-          borderRadius={"50%"}
-          height={"50px"}
-          width={"50px"}
+          marginTop={"200px"}
           display={"flex"}
-          justifyContent={"center"}
+          justifyContent={"space-between"}
           alignItems={"center"}
-          padding={"10px"}
-          float={"right"}
+          bgColor={"rgba(0, 0, 0, 0.5)"}
+          width={"100%"}
+          padding={"4px"}
+          borderRadius={"5px"}
         >
-          <Text
-            color={"#fff"}
-          >
-            {overall}
-          </Text>
-        </Box>
-        <Box>
-          <Text
-            color={"#fff"}
-            fontSize={"20px"}
-            fontWeight={"bold"}
+           <Box>
+            <Text
+              color={"#ffffff"}
+              fontSize={"20px"}
+              fontWeight={"bold"}
+              display={"flex"}
+            >
+              {name}
+            </Text>
+          </Box>
+          <Box
+            bgColor={"#2191FB"}
+            borderRadius={"50%"}
+            height={"50px"}
+            width={"50px"}
             display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            padding={"10px"}
+            border={"4px solid #F0EDEE"}
           >
-            {name}
-          </Text>
+            <Text
+              color={"#F0EDEE"}
+              fontSize={"20px"}
+              fontWeight={"bold"}
+            >
+              {overall}
+            </Text>
+          </Box>
+
         </Box>
       </Box>
     </Box>
