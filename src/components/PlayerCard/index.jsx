@@ -11,9 +11,12 @@ export function PlayerCard({
         backgroundImage={`url(${photo})`}
         backgroundPosition={"center"}
         backgroundSize={"cover"}
+        backgroundRepeat={"no-repeat"}
+        width={"100%"}
         height={"280px"}
-        width={"200px"}
-        border={"2px solid #fff"}
+        border={"4px solid #fff"}
+        padding={"10px"}
+        boxShadow={"0 0 10px #000"}
       >
         <Box
           bgColor={"#000"}
@@ -23,6 +26,8 @@ export function PlayerCard({
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
+          padding={"10px"}
+          float={"right"}
         >
           <Text
             color={"#fff"}
@@ -30,7 +35,16 @@ export function PlayerCard({
             {overall}
           </Text>
         </Box>
-        <Text>{name}</Text>
+        <Box>
+          <Text
+            color={"#fff"}
+            fontSize={"20px"}
+            fontWeight={"bold"}
+            display={"flex"}
+          >
+            {name}
+          </Text>
+        </Box>
       </Box>
     </Box>
   )
