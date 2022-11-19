@@ -21,8 +21,13 @@ export function Form() {
 
   const [players, setPlayers] = useState([]);
 
-  const { register, handleSubmit, onSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
+  const { register, handleSubmit, resetField, onSubmit, formState:{ errors } } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: '',
+      photo: '',
+      overall: '',
+    }
   });
 
 
@@ -34,19 +39,9 @@ export function Form() {
         overall: overall,
       }
       setPlayers([...players, data]);
-
     }
   }
 
-  function clearData() {
-    setName('');
-    setPhoto('');
-    setOverall('');
-  }
-
-  useEffect(() => {
-    console.log(players);
-  }, [players])
 
   return (
     <Box
