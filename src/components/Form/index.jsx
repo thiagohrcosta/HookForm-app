@@ -10,7 +10,7 @@ import { PlayerCard } from "../PlayerCard";
 const schema = yup.object({
   name: yup.string().required(),
   photo: yup.string().required(),
-  overall: yup.number().required(),
+  overall: yup.number().required("Overall is required").min(1, "Overall must be greater than 1").max(100, "Overall must be less than 100"),
 }).required();
 
 
@@ -149,7 +149,7 @@ export function Form() {
                 </FormLabel>
                 <Input
                   bgColor={"#fff"}
-                  {...register("overall", { required: true })}
+                  {...register("overall")}
                   type={"number"}
                   onChange={(e) => setOverall(e.target.value)}
                 />
